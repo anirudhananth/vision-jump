@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 0.2, z: 1}
+  m_LocalScale: {x: 4, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2625433293907531480}
@@ -177,8 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaced: 0
-  PreviewColor: {r: 0, g: 0.22211146, b: 1, a: 0.5294118}
-  OverlapColor: {r: 1, g: 0, b: 0, a: 0.53333336}
+  PreviewColor: {r: 0.2778574, g: 0.6745098, b: 0.19999997, a: 0.5294118}
+  OverlapColor: {r: 0.89411765, g: 0.1576631, b: 0.11372548, a: 0.53333336}
   NormalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &7301512190569913929
 MonoBehaviour:
@@ -193,3 +193,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DieOutOfViewport: 1
+  RelPos: {x: 0, y: 0, z: 0}
