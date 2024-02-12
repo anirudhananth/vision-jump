@@ -6,11 +6,11 @@ public class Movement : MonoBehaviour
 {
     private float horizontal;
     private float speed = 8f;
-    private float jumpingPower = 16f;
+    private float jumpingPower = 20f;
     private bool isFacingRight = true;
     Vector3 movementVector;
 
-    [SerializeField] private Rigidbody rb;
+    private Rigidbody2D rb => GetComponent<Rigidbody2D>();
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
     {
         Vector3 movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
         // rb.MovePosition(rb.position + movementVector * speed * Time.fixedDeltaTime);
-        rb.velocity = new Vector3(horizontal * speed, rb.velocity.y, 0);
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         if (horizontal > 0 && !isFacingRight)
         {
             Flip();
@@ -38,16 +38,16 @@ public class Movement : MonoBehaviour
     private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) {
-            rb.velocity = new Vector3(rb.velocity.x, jumpingPower, 0);
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
 
         if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0f) {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.5f, 0);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
     }
 
     private bool IsGrounded() {
-        return Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
     private void Flip()
