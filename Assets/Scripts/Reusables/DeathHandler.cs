@@ -9,6 +9,7 @@ public class CanDie : MonoBehaviour
 
     [SerializeField]
     private Vector3 RelPos;
+    private int health = 4;
 
     private void Die()
     {
@@ -17,10 +18,20 @@ public class CanDie : MonoBehaviour
 
     private void Update()
     {
-        RelPos = Game.obj.Camera.WorldToViewportPoint(transform.position);
+        RelPos = Game.obj.Camera.WorldToViewportPoint(transform.position - new Vector3(0, -1.5f));
         if (DieOutOfViewport && RelPos.y < Game.DeathYPosition)
         {
             Die();
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col) {
+        if(col.gameObject.tag == "Enemy") {
+            Destroy(col.gameObject);
+            if(health-- == 0) {
+                Debug.Log("Game Over.");
+                Die();
+            }
         }
     }
 }
