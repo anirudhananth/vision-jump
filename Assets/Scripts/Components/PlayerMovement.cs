@@ -8,7 +8,9 @@ public class Movement : MonoBehaviour
     private float speed = 8f;
     private float jumpingPower = 20f;
     private bool isFacingRight = true;
+    private bool canMove = true;
     Vector3 movementVector;
+    private int health = 4;
 
     private Rigidbody2D rb => GetComponent<Rigidbody2D>();
     [SerializeField] private Transform groundCheck;
@@ -22,6 +24,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!canMove) return;
         Vector3 movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
         // rb.MovePosition(rb.position + movementVector * speed * Time.fixedDeltaTime);
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
@@ -37,6 +40,7 @@ public class Movement : MonoBehaviour
 
     private void Jump()
     {
+        if(!canMove) return;
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
@@ -57,6 +61,17 @@ public class Movement : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col) {
+        if(gameObject.name == "Player" && col.gameObject.tag == "Enemy") {
+            Destroy(col.gameObject);
+            if(health-- == 0) {
+                Debug.Log("Game Over.");
+                canMove = false;
+                Game.obj.EndGame();
+            }
         }
     }
 }

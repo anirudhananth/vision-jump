@@ -9,10 +9,12 @@ public class CanDie : MonoBehaviour
 
     [SerializeField]
     private Vector3 RelPos;
-    private int health = 4;
 
     private void Die()
     {
+        if(gameObject.name == "Player") {
+            Game.obj.EndGame();
+        }
         Destroy(gameObject);
     }
 
@@ -22,16 +24,6 @@ public class CanDie : MonoBehaviour
         if (DieOutOfViewport && RelPos.y < Game.DeathYPosition)
         {
             Die();
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D col) {
-        if(col.gameObject.tag == "Enemy") {
-            Destroy(col.gameObject);
-            if(health-- == 0) {
-                Debug.Log("Game Over.");
-                Die();
-            }
         }
     }
 }
