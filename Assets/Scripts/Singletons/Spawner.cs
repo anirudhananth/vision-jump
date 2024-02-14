@@ -27,6 +27,7 @@ public class Spawner : MonoBehaviour
 
         while(canSpawn) {
             yield return new WaitForSeconds(Random.Range(2, 5) * 0.5f);
+            if (!Game.obj.GameHasStarted) { continue; }
 
             multiplierX = Mathf.Pow(-1, Random.Range(0, 2));
             multiplierY = Mathf.Pow(-1, Random.Range(0, 2));
@@ -48,6 +49,7 @@ public class Spawner : MonoBehaviour
     private IEnumerator SpawnTopDownEnemy() {
         while(canSpawn) {
             yield return new WaitForSeconds(Random.Range(2, 4));
+            if (!Game.obj.GameHasStarted) { continue; }
 
             float multX = Mathf.Pow(-1, Random.Range(0, 2));
             x = Camera.main.transform.position.x + multX * Random.Range(0, cameraWidth / 2f);

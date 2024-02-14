@@ -2,20 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CanDie : MonoBehaviour
+public class DeathHandler : MonoBehaviour
 {
     [Header("Configuration")]
     public bool DieOutOfViewport = true;
+    public AudioClip deathAudio;
 
     [SerializeField]
     private Vector3 RelPos;
+    private bool isDead;
+    private AudioSource audioSource;
 
-    private void Die()
+    public void Die()
     {
+        if (isDead) return;
+        isDead = true;
+        if (audioSource != null && deathAudio != null)
+        {
+            Utils.Play(audioSource, deathAudio);
+        }
         if(gameObject.name == "Player") {
             Game.obj.EndGame();
         }
-        Destroy(gameObject);
+        else if (gameObject.CompareTag("Enemy"))
+        {
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().velocity *= 0.1f;
+            GetComponentInChildren<Animator>().SetTrigger("die");
+            Destroy(gameObject, 0.5f);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()

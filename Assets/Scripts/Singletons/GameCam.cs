@@ -8,6 +8,8 @@ public class GameCam : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!Game.obj.GameHasStarted) return;
+
         transform.Translate(CamSpeed * Time.fixedDeltaTime * Vector3.up);
     }
 }

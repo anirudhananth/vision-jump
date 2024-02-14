@@ -8,10 +8,10 @@ public class Platform : MonoBehaviour
     public Color PreviewColor;
     public Color OverlapColor;
     public Color NormalColor;
+    public SpriteRenderer OverlayRenderer;
 
     public bool HasOverlap => Col.IsTouchingLayers(Game.obj.Placer.OverlappingLayers);
 
-    public SpriteRenderer Renderer { get; private set; }
     public Collider2D Col { get; private set; }
 
     public bool TryPlace()
@@ -25,7 +25,7 @@ public class Platform : MonoBehaviour
 
         IsPlaced = true;
         Col.isTrigger = false;
-        Renderer.color = NormalColor;
+        OverlayRenderer.color = NormalColor;
         return true;
     }
 
@@ -36,11 +36,11 @@ public class Platform : MonoBehaviour
 
     private void Start()
     {
-        Renderer = GetComponentInChildren<SpriteRenderer>();
+        OverlayRenderer = GetComponentInChildren<SpriteRenderer>();
         Col = GetComponentInChildren<Collider2D>();
         if (!IsPlaced)
         {
-            Renderer.color = PreviewColor;
+            OverlayRenderer.color = PreviewColor;
             Col.isTrigger = true;
         }
     }
@@ -51,11 +51,11 @@ public class Platform : MonoBehaviour
 
         if (HasOverlap || !Game.obj.Placer.CanPlace)
         {
-            Renderer.color = OverlapColor;
+            OverlayRenderer.color = OverlapColor;
         }
         else
         {
-            Renderer.color = PreviewColor;
+            OverlayRenderer.color = PreviewColor;
         }
     }
 }
