@@ -1502,7 +1502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.8392157}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2316,7 +2316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5f34b1b7525c4458175721352acdb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnlockScore: 150
+  UnlockScore: 125
   Name: Defensive
   Type: 3
   NotSelectedSprite: {fileID: 1119202811, guid: 64e850797b9e3ba4592e29166c20e71c, type: 3}
