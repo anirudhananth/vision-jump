@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
     private float multiplierX, multiplierY, x, y;
 
     [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject enemyPrefab2;
 
     private List<GameObject> spawnedEnemies;
     // Start is called before the first frame update
@@ -51,15 +52,26 @@ public class Spawner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(2, 4));
             if (!Game.obj.GameHasStarted) { continue; }
 
+            bool spawnRegular = Random.Range(0f, 1f) < 0.9f;
+
             float multX = Mathf.Pow(-1, Random.Range(0, 2));
             x = Camera.main.transform.position.x + multX * Random.Range(0, cameraWidth / 2f);
             y = Camera.main.transform.position.y + cameraHeight / 2f;
-            GameObject enemy = Instantiate(enemyPrefab, new Vector2(x, y), Quaternion.identity);
+            if (spawnRegular)
+            {
+                GameObject enemy = Instantiate(enemyPrefab, new Vector2(x, y), Quaternion.identity);
 
-            Vector2 direction = Vector2.down + new Vector2(Random.Range(0, 2) * multX, Random.Range(0, 2) * -1f);
-            direction.Normalize();
-            enemy.GetComponent<Rigidbody2D>().AddForce(direction * 5f, ForceMode2D.Impulse);
-            spawnedEnemies.Add(enemy);
+                Vector2 direction = Vector2.down + new Vector2(Random.Range(0, 2) * multX, Random.Range(0, 2) * -1f);
+                direction.Normalize();
+                enemy.GetComponent<Rigidbody2D>().AddForce(direction * 5f, ForceMode2D.Impulse);
+                spawnedEnemies.Add(enemy);
+            }
+            else
+            {
+                GameObject enemy = Instantiate(enemyPrefab2, new Vector2(x, y), Quaternion.identity);
+                // enemy.GetComponent<Rigidbody2D>().velocity = Vector2.down;
+                spawnedEnemies.Add(enemy);
+            }
         }
     }
 

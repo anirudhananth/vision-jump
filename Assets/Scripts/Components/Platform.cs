@@ -9,6 +9,7 @@ public class Platform : MonoBehaviour
     public Color OverlapColor;
     public Color NormalColor;
     public SpriteRenderer OverlayRenderer;
+    public GameObject NoMorePlatformSprite;
 
     public bool HasOverlap => Col.IsTouchingLayers(Game.obj.Placer.OverlappingLayers);
 
@@ -26,6 +27,7 @@ public class Platform : MonoBehaviour
         IsPlaced = true;
         Col.isTrigger = false;
         OverlayRenderer.color = NormalColor;
+        GetComponentInChildren<ParticleSystem>().Play();
         return true;
     }
 
@@ -52,9 +54,11 @@ public class Platform : MonoBehaviour
         if (HasOverlap || !Game.obj.Placer.CanPlace)
         {
             OverlayRenderer.color = OverlapColor;
+            NoMorePlatformSprite.SetActive(!Game.obj.Placer.CanPlace);
         }
         else
         {
+            NoMorePlatformSprite.SetActive(false);
             OverlayRenderer.color = PreviewColor;
         }
     }

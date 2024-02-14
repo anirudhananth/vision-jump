@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -14,6 +15,7 @@ public class PlatformPlacer : MonoBehaviour
     public LayerMask OverlappingLayers;
     public AudioClip placeSuccessAudio;
     public AudioClip placeFailAudio;
+    public TextMeshProUGUI PlatformText;
 
     public bool CanPlace => CurCooldown == 0 && CurPlatformCount < Game.obj.MaxPlatformCount;
 
@@ -33,6 +35,7 @@ public class PlatformPlacer : MonoBehaviour
 
     private void Update()
     {
+        PlatformText.text = $"# platforms: {CurPlatformCount}/{Game.obj.MaxPlatformCount}";
         if (!Game.obj.GameHasStarted || Game.obj.GameIsPaused) return;
 
         CurCooldown = Mathf.Clamp(CurCooldown - Time.deltaTime, 0, Game.obj.MaxCooldown);

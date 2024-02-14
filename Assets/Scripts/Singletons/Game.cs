@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Game : MonoBehaviour
 {
     public static Game obj;
+    public static float highScore;
     private float score;
 
     [Header("Game Fixed Data")]
@@ -29,6 +31,7 @@ public class Game : MonoBehaviour
     public Camera Camera;
     public Animator MenuAnimator;
     public AudioClip ClickAudio;
+    public TextMeshProUGUI GameOverText;
     [SerializeField] TMPro.TextMeshProUGUI scoreText;
 
     [Header("Game Pre-assigned Data")]
@@ -40,6 +43,7 @@ public class Game : MonoBehaviour
 
     public void Reset()
     {
+        score = 0;
         obj = this;
         CamSpeed = InitCamSpeed;
         GameIsOver = false;
@@ -95,7 +99,8 @@ public class Game : MonoBehaviour
             CamSpeed -= CamDeceleration * Time.fixedDeltaTime;
             CamSpeed = Mathf.Max(CamSpeed, 0);
         }
-        scoreText.text = score.ToString("0");
+        if (score > highScore) { highScore = score; }
+        scoreText.text = $"Score {score.ToString("0")}\n(High {highScore.ToString("0")})";
     }
 
     public void EndGame()
@@ -103,6 +108,8 @@ public class Game : MonoBehaviour
         MenuAnimator.SetTrigger("GameOver");
         GameIsOver = true;
         Time.timeScale = 1.0f;
+        GameOverText.text = $"High\t{(int)highScore}\r\nScore\t{(int)score}\r\n\r\n[Space] Restart";
+
         StartCoroutine(EndScene());
     }
 

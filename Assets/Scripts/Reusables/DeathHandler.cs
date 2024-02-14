@@ -28,7 +28,11 @@ public class DeathHandler : MonoBehaviour
         {
             GetComponent<Collider2D>().enabled = false;
             GetComponent<Rigidbody2D>().velocity *= 0.1f;
-            GetComponentInChildren<Animator>().SetTrigger("die");
+            var animator = GetComponentInChildren<Animator>();
+            if (animator != null) {
+                animator.SetTrigger("die");
+                GetComponentInChildren<ParticleSystem>().Play();
+            }
             Destroy(gameObject, 0.5f);
         }
         else
