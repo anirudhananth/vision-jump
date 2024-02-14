@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+public enum PlatformType
+{
+    NORMAL, BOUNCY, SAFE, DEFENSIVE
+}
+
 public class PlatformPlacer : MonoBehaviour
 {
     [Header("Placer Dynamic Data")]
-    public int CurPlatformCount;
+    public int CurPlatformCount = 1;
     public float CurCooldown;
+    public PlatformType SelectedPlatformType = PlatformType.NORMAL;
 
     [Header("Placer Pre-assigned Data")]
     public GameObject PlatformPrefab;
@@ -18,6 +25,7 @@ public class PlatformPlacer : MonoBehaviour
     public TextMeshProUGUI PlatformText;
 
     public bool CanPlace => CurCooldown == 0 && CurPlatformCount < Game.obj.MaxPlatformCount;
+    public PlatformIcon[] PlatformIcons;
 
     private Platform CandidatePlatform;
     private AudioSource audioSource;
@@ -64,5 +72,19 @@ public class PlatformPlacer : MonoBehaviour
                 Utils.Play(audioSource, placeFailAudio);
             }
         }
+
+        List<PlatformIcon> unlocked = PlatformIcons.Where((f) => f.isUnlocked).ToList();
+        int selected = unlocked.FindIndex((f) => f.Type == SelectedPlatformType);
+
+        if (Input.mouseScrollDelta.y > 0) {
+            selected -= 1;
+        }
+        if (Input.mouseScrollDelta.y < 0)
+        {
+            selected += 1;
+        }
+        selected += unlocked.Count;
+
+        SelectedPlatformType = unlocked.Count > 0 ? unlocked[selected % unlocked.Count].Type : PlatformType.NORMAL;
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f1d9f74f8db2878458dd9f9e4ea2b6d7
+guid: 64e850797b9e3ba4592e29166c20e71c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: not-allowed_0
+      name: skill-icon-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 18
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37f7c517bf9ffa94da7d46f17814b9e2
-      internalID: -813119782
+      spriteID: bd5fffc61f8ec714d85d3eb442d6cb7e
+      internalID: 1119202811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: not-allowed_1
+      name: skill-icon-Sheet_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 18
         y: 0
-        width: 16
-        height: 16
+        width: 18
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f423afba244f204ea736c0b49423f9f
-      internalID: 84360863
+      spriteID: d1c1e70a350ce15418d93020f807bd6b
+      internalID: -952450872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skill-icon-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bfcced3706c7fd4d8fd29f906f9275e
+      internalID: 895742120
       vertices: []
       indices: 
       edges: []
@@ -167,7 +188,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: a1f1557e665e7d24b86a36a978ef1d0f
     internalID: 0
     vertices: []
     indices: 
@@ -175,8 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      not-allowed_0: -813119782
-      not-allowed_1: 84360863
+      skill-icon-Sheet_0: 1119202811
+      skill-icon-Sheet_1: -952450872
+      skill-icon-Sheet_2: 895742120
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

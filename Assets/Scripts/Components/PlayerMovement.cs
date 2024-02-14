@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     private float jumpingPower = 20f;
     private bool isFacingRight = true;
     private bool canMove = true;
-    private bool isGrounded = true;
+    private Collider2D isGrounded;
     Vector3 movementVector;
     private int health = 4;
 
@@ -59,7 +59,12 @@ public class Movement : MonoBehaviour
     {
         if(!canMove) return;
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            var platform = isGrounded.gameObject.name;
+            var jp = jumpingPower;
+            if (platform != null && platform == "Bouncy") {
+                jp *= 1.4f;
+            }
+            rb.velocity = new Vector2(rb.velocity.x, jp);
             animator.SetTrigger("Jump");
             audioSource.clip = jumpAudio;
             audioSource.Play();
@@ -70,7 +75,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private bool IsGrounded() {
+    private Collider2D IsGrounded() {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 

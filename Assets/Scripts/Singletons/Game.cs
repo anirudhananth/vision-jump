@@ -17,7 +17,7 @@ public class Game : MonoBehaviour
     public const float InitMaxCooldown = 4f;
     public const float CamAcceleration = 0.02f;
     public const float CamDeceleration = 2.5f;
-    public const float ScoreMultiplier = 1.5f;
+    public const float ScoreMultiplier = 2.5f;
     public const float DeathYPosition = 0f;
 
     [Header("Game Dynamic Data")]
@@ -39,6 +39,7 @@ public class Game : MonoBehaviour
     public GameObject Player;
     public PlatformPlacer Placer;
     public AudioSource AudioSource;
+    public Sprite NoMorePlatformSprite;
 
 
     public void Reset()
@@ -88,15 +89,14 @@ public class Game : MonoBehaviour
         }
 
         if (!GameHasStarted) return;
-
         if (!GameIsOver)
         {
-            CamSpeed += CamAcceleration * Time.fixedDeltaTime;
-            score += ScoreMultiplier * Time.fixedDeltaTime;
+            CamSpeed += CamAcceleration * Time.deltaTime;
+            score += ScoreMultiplier * Time.deltaTime;
         }
         else
         {
-            CamSpeed -= CamDeceleration * Time.fixedDeltaTime;
+            CamSpeed -= CamDeceleration * Time.deltaTime;
             CamSpeed = Mathf.Max(CamSpeed, 0);
         }
         if (score > highScore) { highScore = score; }
